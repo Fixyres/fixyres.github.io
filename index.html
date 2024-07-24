@@ -1,11 +1,37 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Привет</title>
+    <title>Payment Integration</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Привет!</h1>
+    <header>
+        <h1>Payment Integration Example</h1>
+    </header>
+    
+    <main>
+        <section class="payment-section">
+            <h2>Make a Payment</h2>
+            
+            <div class="payment-buttons">
+                <!-- Google Pay Button -->
+                <div id="google-pay-button" class="payment-button"></div>
+
+                <!-- Apple Pay Button -->
+                <div id="apple-pay-button" class="payment-button"></div>
+
+                <!-- Crypto Payment Button -->
+                <button id="crypto-pay-button" class="payment-button">Pay with Crypto</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Payment Integration Example</p>
+    </footer>
+
+    <script src="scripts.js"></script>
 </body>
 </html>
