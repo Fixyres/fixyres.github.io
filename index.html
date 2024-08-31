@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>base</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap">
     <style>
         body {
             margin: 0;
@@ -16,6 +17,10 @@
             color: #fff;
             background: black;
             overflow: hidden;
+            touch-action: none;
+            user-select: none;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
         .menu {
             display: flex;
@@ -24,6 +29,7 @@
             padding: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             z-index: 1000;
+            width: 100%;
         }
         .menu a {
             color: #e0e0e0;
@@ -38,33 +44,33 @@
             border-radius: 5px;
         }
         .content-container {
-    display: flex;
-    height: calc(100vh - 60px);
-    position: relative;
-    overflow: hidden;
-    width: 200%; /* Дважды шире контейнера, чтобы контент мог двигаться */
-    transform: translateX(-50%); /* Центрируем контейнер */
-    transition: transform 0.5s ease;
-}
-.content {
-    width: 50%; /* Половина ширины контейнера */
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: opacity 0.5s ease;
-    opacity: 0;
-}
-.content.active {
-    opacity: 1;
-}
-#bio {
-    left: 0;
-}
-#fohosting {
-    left: 50%;
-}
-
+            display: flex;
+            height: calc(100vh - 60px);
+            width: 200%;
+            transform: translateX(-50%);
+            transition: transform 0.5s ease;
+        }
+        .content {
+            width: 50%;
+            height: 100%;
+            position: relative;
+            transition: opacity 0.5s ease;
+            opacity: 0;
+            z-index: 992837383;
+            overflow: hidden;
+        }
+        .content.active {
+            opacity: 1;
+        }
+        #bio {
+            background: url('video/back.mp4') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #fohosting {
+            background: url('video/video.mp4') no-repeat center center/cover;
+        }
         .video-background {
             position: absolute;
             top: 0;
@@ -81,11 +87,13 @@
             border-radius: 15px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
             width: 80%;
-            height: 400px;            
+            max-width: 400px;
+            height: auto;
             box-sizing: border-box;
             text-align: center;
             margin: auto;
             position: relative;
+            z-index: -7;
             top: 50%;
             transform: translateY(-50%);
         }
@@ -95,7 +103,6 @@
             font-weight: 700;
             letter-spacing: 1px;
             color: #f4f4f4;
-            user-select: none;
         }
         .login-box input[type="text"], .login-box input[type="password"] {
             width: calc(100% - 32px);
@@ -109,7 +116,6 @@
             outline: none;
             transition: background 0.3s, transform 0.2s;
             box-sizing: border-box;
-            user-select: none;
         }
         .login-box input[type="text"]:focus, .login-box input[type="password"]:focus {
             background: rgba(255, 255, 255, 0.3);
@@ -125,16 +131,16 @@
             font-size: 18px;
             cursor: pointer;
             transition: background 0.3s, transform 0.2s;
-            user-select: none;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
             -webkit-tap-highlight-color: transparent;
         }
         .login-box button:hover {
-            background: #1c86ee;
+            background: #1e90ff;
         }
         .login-box button:active {
             background: #1e90ff;
-            transform: scale(0.98);
+            transform: scale(0.90);
         }
         .login-box a {
             color: #1e90ff;
@@ -142,31 +148,65 @@
             font-size: 14px;
             display: block;
             margin-top: 15px;
-            transition: color 0.3s, opacity 0.3s;
+            transition: color 0.3s, transform 0.2s;
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
             -webkit-tap-highlight-color: transparent;
         }
         .login-box a:hover {
             color: #1c86ee;
-            opacity: 0.8;
+            transform: scale(0.90);
         }
-        .notification {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #ff4d4d;
+       .notification {
+    position: fixed;
+    top: 85%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+    background: #ff0000;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    font-size: 16px;
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.notification.show {
+    opacity: 1;
+}
+
+        #bio-content {
+            padding: 20px;
+            text-align: center;
+            font-family: 'Raleway', sans-serif;
+            color: #f4f4f4;
+            font-size: 22px;
+        }
+        #bio-content p {
+            margin: 10px 0;
+        }
+        .bio-buttons {
+            margin-top: 20px;
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+            -webkit-tap-highlight-color: transparent;
+        }
+        .bio-buttons button {
+            background: #1e90ff;
+            border: none;
+            border-radius: 10px;
             color: #fff;
             padding: 10px 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
             font-size: 16px;
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.5s ease;
+            cursor: pointer;
+            margin: 5px;
+            transition: background 0.3s, transform 0.2s;
+            -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+            -webkit-tap-highlight-color: transparent;
         }
-        .notification.show {
-            opacity: 1;
-        }
+        .bio-buttons button:hover {
+    background: #1c86ee;
+    transform: scale(0.90);
+}
     </style>
 </head>
 <body>
@@ -175,92 +215,117 @@
         <a href="#" id="fohosting-link">Fohosting</a>
     </div>
     <div class="content-container">
-        <div id="bio" class="content active">
-            <h1>BIO Page</h1>
-            <p>This is the BIO page content.</p>
-        </div>
-        <div id="fohosting" class="content">
-            <video class="video-background" autoplay muted loop>
+        <video class="video-background" autoplay muted loop>
                 <source src="video/video.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
+        <div id="bio" class="content active">
+            
+            <div id="bio-content">
+                <p>● Name: Artem</p>
+                <p>● Y.o: 13</p>
+                <p>● Birthday: 28.05</p>
+                <p>● Country: 🇺🇦 Ukraine</p>
+                <p>● City: Buchach</p>
+                <p>● Languages: 🇺🇸 English, 🇺🇦 Ukrainian, 🇷🇺 Russian</p>
+                <div class="bio-buttons">
+                    <button onclick="window.location.href='https://t.me/Foxy437'">Foxy437</button>
+                    <button onclick="window.location.href='http://t.me/send?start=IVCwio3dINaj'">Donate</button>
+                </div>
+            </div>
+        </div>
+        <div id="fohosting" class="content">
             <div class="login-box">
                 <h1>Fohosting</h1>
                 <form id="login-form">
                     <input type="text" id="username" placeholder="Username" required>
                     <input type="password" id="password" placeholder="Password" required>
-                    <button type="submit">Login</button>
+                    <button type="submit">Login</button>                   
                 </form>
                 <a href="mailto:foxyy437@gmail.com?subject=Request for Account Creation&body=Please create a new account for me.">Don't have an account? Request creation!</a>
-            </div>
+            </div>        
             <div id="notification" class="notification">Invalid username or password!</div>
-        </div>
+        </div>        
     </div>
 
-   <script>
-    document.getElementById('bio-link').addEventListener('click', function() {
-        showContent('bio');
-    });
-    document.getElementById('fohosting-link').addEventListener('click', function() {
-        showContent('fohosting');
-    });
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            showContent('bio');
+        });
 
-    function showContent(contentId) {
-        const container = document.querySelector('.content-container');
-        const links = document.querySelectorAll('.menu a');
-        
-        if (contentId === 'bio') {
-            container.style.transform = 'translateX(0)';
-        } else {
-            container.style.transform = 'translateX(-50%)';
+        document.getElementById('bio-link').addEventListener('click', function() {
+            showContent('bio');
+        });
+        document.getElementById('fohosting-link').addEventListener('click', function()
+        {
+            showContent('fohosting');
+        });
+
+        function showContent(contentId) {
+            const container = document.querySelector('.content-container');
+            const links = document.querySelectorAll('.menu a');
+
+            if (contentId === 'bio') {
+                container.style.transform = 'translateX(0)';
+            } else {
+                container.style.transform = 'translateX(-50%)';
+            }
+
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => {
+                if (content.id === contentId) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+
+            links.forEach(link => {
+                if (link.id === contentId + '-link') {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
         }
 
-        const contents = document.querySelectorAll('.content');
-        contents.forEach(content => {
-            if (content.id === contentId) {
-                content.classList.add('active');
+        const credentials = [
+            { username: 'Foxy437', password: 'Kyrka228+', sshHost: 's2.serv00.com', sshPassword: '*P9*gNrMDWAL#1a1c9xb' },
+            { username: 'Ronix', password: 'Kyrka228+', sshHost: 's2.serv00.com', sshPassword: '*P9*gNrMDWAL#1a1c9xb' }
+        ];
+
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            const user = credentials.find(cred => cred.username === username && cred.password === password);
+
+            if (user) {
+                localStorage.setItem('user', JSON.stringify(user));
+                window.location.href = 'terminal/terminal.html';
             } else {
-                content.classList.remove('active');
+                showNotification('Invalid username or password!');
             }
         });
 
-        links.forEach(link => {
-            if (link.id === contentId + '-link') {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
-            }
-        });
-    }
-
-    const credentials = [
-        { username: 'Foxy437', password: 'Kyrka228+', sshHost: 's2.serv00.com', sshPassword: '*P9*gNrMDWAL#1a1c9xb' },
-        { username: 'Ronix', password: 'Kyrka228+', sshHost: 's2.serv00.com', sshPassword: '*P9*gNrMDWAL#1a1c9xb' }
-    ];
-
-    document.getElementById('login-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const username = document.getElementById('username').value.trim();
-        const password = document.getElementById('password').value.trim();
-
-        const user = credentials.find(cred => cred.username === username && cred.password === password);
-
-        if (user) {
-            localStorage.setItem('user', JSON.stringify(user));
-            window.location.href = 'terminal.html';
-        } else {
-            showNotification('Invalid username or password!');
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
         }
-    });
 
-    function showNotification(message) {
-        const notification = document.getElementById('notification');
-        notification.textContent = message;
-        notification.classList.add('show');
-        setTimeout(() => {
-            notification.classList.remove('show');
-        }, 3000);
-    }
-   </script>
-   
+        window.addEventListener('wheel', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+
+        window.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+    </script>
+</body>
+</html>
