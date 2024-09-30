@@ -176,11 +176,21 @@
 }
 
         #bio-content {
-            padding: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+            width: 80%;
+            max-width: 400px;
+            height: auto;
+            box-sizing: border-box;
             text-align: center;
-            font-family: 'Raleway', sans-serif;
-            color: #f4f4f4;
-            font-size: 22px;
+            margin: auto;
+            position: relative;
+            z-index: -7;
+            top: 20%;
+            transform: translateY(-50%);
+            
         }
         #bio-content p {
             margin: 10px 0;
@@ -212,15 +222,13 @@
 <body>
     <div class="menu">
         <a href="#" id="bio-link" class="active">BIO</a>
-        <a href="#" id="fohosting-link">Fohosting</a>
     </div>
     <div class="content-container">
         <video class="video-background" autoplay muted loop>
                 <source src="video/video.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
-        <div id="bio" class="content active">
-            
+        <div id="bio" class="content active">           
             <div id="bio-content">
                 <p>● Name: Artem</p>
                 <p>● Y.o: 13</p>
@@ -234,18 +242,7 @@
                 </div>
             </div>
         </div>
-        <div id="fohosting" class="content">
-            <div class="login-box">
-                <h1>Fohosting</h1>
-                <form id="login-form">
-                    <input type="text" id="username" placeholder="Username" required>
-                    <input type="password" id="password" placeholder="Password" required>
-                    <button type="submit">Login</button>                   
-                </form>
-                <a href="mailto:foxyy437@gmail.com?subject=Request for Account Creation&body=Please create a new account for me.">Don't have an account? Request creation!</a>
-            </div>        
-            <div id="notification" class="notification">Invalid username or password!</div>
-        </div>        
+               
     </div>
 
     <script>
